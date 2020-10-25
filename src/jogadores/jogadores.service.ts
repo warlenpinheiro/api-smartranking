@@ -1,8 +1,6 @@
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { from } from 'rxjs';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CriarJogadorDto } from './dtos/criar-jogador.dto';
 import { Jogador } from './interfaces/jogador.interface';
-import { v4 as uuid4 } from 'uuid';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from "mongoose";
 
@@ -36,7 +34,7 @@ export class JogadoresService {
 
     async deletarJogador(email: string): Promise<any> {
 
-        return await this.jogadorModel.remove({email}).exec();
+        return await this.jogadorModel.deleteOne({email}).exec();
     }
 
     async consultarTodosJogadores(): Promise<Jogador[]> {
